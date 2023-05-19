@@ -1,0 +1,124 @@
+.container {
+    height: 100vh;
+   width: 100vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.question {
+    margin-top: 1rem;
+    height: fit-content;
+    width: 62vw;
+    background-color: darksalmon;
+    border-radius: 1.2rem;
+   
+}
+.question h4 {
+    font-size: 1.2rem;
+    padding-top: 0.6rem;
+    
+    
+}
+.question h2 {
+    margin-top: 1rem;
+}
+.list {
+    margin-top: 0.8rem;
+    margin-bottom: 2rem; 
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.list li {
+    border: 3px solid rgb(250, 245, 245);
+    width: 48%;
+    padding: 0.6rem;
+    border-radius: 0.4rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    display: flex;
+   
+}
+.list li input  {
+  margin-right: 2rem; 
+}
+.nextBtn {
+    height: 1.8rem;
+    width: 5.6rem;
+    color: whitesmoke;
+    background-color: rgb(245, 144, 77);
+    text-decoration: none;
+    border-radius: 0.2rem; 
+    font-size: 0.8rem;
+    position: relative;
+    z-index: 1;
+    border: none;
+
+}
+.nextBtn::before {
+    content: "";
+    background-color: black;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 1s;
+
+}
+.nextBtn:hover::before {
+    transform: scaleX(1);
+    z-index: -1;
+}
+.btn {
+    margin-bottom: 1.2rem;
+}
+.result {
+    height: 28%;
+    width: 28%;
+    margin-left: 7.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgb(254, 207, 191);
+    border-radius: 0.4rem;
+    padding-top: 1rem;
+   box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+.restart {
+    height: 1.8rem;
+    width: 5.6rem;
+    color: whitesmoke;
+    background-color: rgb(139, 188, 245);
+    text-decoration: none;
+    border-radius: 0.2rem; 
+    font-size: 0.8rem;
+    position: relative;
+    z-index: 1;
+    border: none;
+}
+.restart::before {
+    content: "";
+    background-color: black;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 1s;
+
+}
+.restart:hover::before {
+    transform: scaleX(1);
+    z-index: -1;
+}
+/* .delRestart {
+    display: none;
+} */
