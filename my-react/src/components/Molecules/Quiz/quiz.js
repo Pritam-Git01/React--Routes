@@ -69,7 +69,7 @@ export default function Quiz() {
             })}
           </ul>
 
-          <div><Timer times = {10} showFinalResult={setShowResult} /></div>
+          <div><Timer times = {120} showFinalResult={setShowResult} /></div>
           
           <div className={styles.btn}><button className={styles.nextBtn} onClick={questionChange}> Next</button></div>
         </div>
