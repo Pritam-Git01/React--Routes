@@ -1,13 +1,16 @@
 
 import './App.css';
-import { store } from './App/store'
+
+import Calculator from './components/calculator';
 
 
 function App() {
   return (
    <div className='App'>
+    <Calculator/>
+    </div>
   
-      </div>
+      
     )
  
 }
