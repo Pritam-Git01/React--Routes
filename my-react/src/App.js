@@ -1,13 +1,14 @@
 
 import './App.css';
+import Form from './components/Form';
 
-import Calculator from './components/calculator';
 
 
 function App() {
   return (
    <div className='App'>
-    <Calculator/>
+   
+   <Form/>
     </div>
   
       

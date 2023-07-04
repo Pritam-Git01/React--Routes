@@ -1,0 +1,30 @@
+.wraper {
+  display: flex;
+  justify-content: center;
+}
+.container {
+  min-height: 60vh;
+  width: 51vw;
+  margin-top: 1.2rem;
+  border: 1px solid black;
+  text-align: center;
+}
+.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.textField{
+  width: 6.2rem;
+}
+.result {
+  display: flex;
+  padding: 0.5rem 0;
+  width: 51vw;
+  flex-direction: column;
+
+}
+tr,table,td,tbody {
+  border: 2px solid rgb(102, 102, 232);
+  border-collapse: collapse;
+}
