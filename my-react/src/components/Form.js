@@ -9,7 +9,8 @@ const Form = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const [edit,setEdit] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [activeId, setActiveId] = useState(null);
 
   const [show, setshow] = useState(false);
 
@@ -20,32 +21,42 @@ const Form = () => {
       email: email,
     };
 
-
+    if (edit) {
+      data.forEach((i) => {
+        if (i.id === activeId) {
+          i.name = name;
+          i.email = email;
+        }
+      });
+      const myData = [...data];
+      setData(myData);
+      setEdit(false);
+      setName("");
+      setEmail("");
+    } else {
+      if (name.length !== 0 && email.length !== 0) {
         setData([...data, studentData]);
         setshow(true);
         setEmail("");
         setName("");
-    
+      } else {
+        alert("Please fill the above Details")
+      }
     }
-    
-    
-  
- 
+  }
 
   const handleDelete = (id) => {
-    let newData = data.filter((i) => i.id === id);
-    setData(newData)
-    
-  }
+    let newData = data.filter((i) => i.id !== id);
+    setData(newData);
+  };
 
-  const handleEdit= (id) => {
+  const handleEdit = (id) => {
     let newData = data.find((i) => i.id === id);
-    setName(newData.name)
-    setEmail(newData.email)
-    setEdit(true)
- 
-
-  }
+    setName(newData.name);
+    setEmail(newData.email);
+    setEdit(true);
+    setActiveId(id);
+  };
 
   return (
     <div className={styles.wraper}>
@@ -75,7 +86,7 @@ const Form = () => {
             sx={{ marginTop: "2rem" }}
             variant="contained"
           >
-            {edit ? "Update":'Submit'}
+            {edit ? "Update" : "Submit"}
           </Button>
         </div>
 
@@ -96,9 +107,19 @@ const Form = () => {
                     <tr key={item.id}>
                       <td>{item.name}</td>
                       <td>{item.email}</td>
-                      <td>
-                        <Button variant="contained" onClick={() => handleEdit(item.id)}>Edit</Button>
-                        <Button variant="contained" onClick={() => handleDelete(item.id)}>Delete</Button>
+                      <td style={{padding:"0.5rem 0"}}>
+                        <Button 
+                          variant="contained"
+                          onClick={() => handleEdit(item.id)}
+                        >
+                          Edit
+                        </Button>
+                        <Button sx={{marginLeft:"1rem", backgroundColor:"rosybrown", ":hover":{bgcolor:"red"}}}
+                          variant="contained"
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          Delete
+                        </Button>
                       </td>
                     </tr>
                   );
