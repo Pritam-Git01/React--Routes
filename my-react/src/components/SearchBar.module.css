@@ -1,0 +1,70 @@
+
+  
+  .wraper {
+      height: 2.8rem;
+      width: 32vw;
+      margin: auto;
+      margin-top: 20vh;
+      background-color: white;
+     display: flex;
+    justify-content: center;
+     border-radius: 2.4rem;
+     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+     position: relative;
+     
+  }
+
+  .icon {
+      margin-left: 1rem;
+      margin-top: 0.9rem;
+      margin-right: 1rem;
+  }
+  .mic {
+      font-size: 1.4rem;
+      position: absolute;
+      right: 0.8rem;
+      top: 0.5rem;
+  }
+  .wraper input {
+      border: none;
+      background: transparent;
+      width: 28vw;
+      font-size: 1.2rem;
+     
+  }
+   input:focus {
+      outline: none;
+  }
+
+ 
+     .resultList {
+    background-color: #fff;
+    width: 32vw;
+    min-height: 0;
+    max-height: 40vh;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 0rem;
+    align-items: center;
+    
+    border-radius: 1rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+.resultList::-webkit-scrollbar {
+    display: none;
+  }
+ .resultList div {
+
+    height: 4.2rem;
+    width: 15vw;
+    padding: 0.6rem  0;
+    
+  }
+  .resultList div:hover {
+    cursor: pointer;
+    background-color: rgb(229, 233, 235);
+    border-radius: 2.2rem;
+    transition: 0.2s ease-in-out;
+  }    
