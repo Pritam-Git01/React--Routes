@@ -31,7 +31,7 @@ const SearchBar = () => {
         <span className={styles.icon}>
           <BiSearch />
         </span>
-        <input type="serach" placeholder="Search" value={query} onChange={(e) => handleChange(e.target.value)} />
+        <input type="serach" placeholder="Search"cd value={query} onChange={(e) => handleChange(e.target.value)} />
         <span className={styles.mic}>
           <IoMdMic />
         </span>
