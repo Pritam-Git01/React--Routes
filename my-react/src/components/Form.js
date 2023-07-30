@@ -1,63 +1,67 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Form.module.css";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { v4 as uuid } from "uuid";
+import { useState, useReducer } from "react";
+
+const initialState = {
+  name: "",
+  email: "",
+  data: [],
+};
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "name":
+      return { ...state, name: action.payload };
+    case "email":
+      return { ...state, email: action.payload };
+    case "submit":
+      return {
+        ...state,
+        data: [
+          ...state.data,
+          { id: action.payload, name: state.name, email: state.email },
+        ],
+      };
+
+    case "delete":
+      return { ...state, data: [...action.payload] };
+
+    default:
+      return state;
+  }
+};
 
 const Form = () => {
-  const [data, setData] = useState([]);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [response, dispatch] = useReducer(reducer, initialState);
+  const [update, setUpdate] = useState(false);
+  console.log(response.data);
 
-  const [edit, setEdit] = useState(false);
-  const [activeId, setActiveId] = useState(null);
-
-  const [show, setshow] = useState(false);
-
-  function handleSubmit() {
-    let studentData = {
-      id: uuid(),
-      name: name,
-      email: email,
-    };
-
-    if (edit) {
-      data.forEach((i) => {
-        if (i.id === activeId) {
-          i.name = name;
-          i.email = email;
-        }
+  const handleSubmit = () => {
+    if(update){
+      let updateData = response.data.forEach(element => {
+        
+        
       });
-      const myData = [...data];
-      setData(myData);
-      setEdit(false);
-      setName("");
-      setEmail("");
-    } else {
-      if (name.length !== 0 && email.length !== 0) {
-        setData([...data, studentData]);
-        setshow(true);
-        setEmail("");
-        setName("");
-      } else {
-        alert("Please fill the above Details")
-      }
     }
-  }
-
+    dispatch({ type: "submit", payload: uuid() });
+    dispatch({ type: "name", payload: "" });
+    dispatch({ type: "email", payload: "" });
+    setUpdate(false);
+  };
   const handleDelete = (id) => {
-    let newData = data.filter((i) => i.id !== id);
-    setData(newData);
+    let newData = [...response.data].filter((i) => i.id !== id);
+    console.log(newData);
+    dispatch({ type: "delete", payload: newData });
   };
-
   const handleEdit = (id) => {
-    let newData = data.find((i) => i.id === id);
-    setName(newData.name);
-    setEmail(newData.email);
-    setEdit(true);
-    setActiveId(id);
+    let editData = response.data.find((item) => item.id === id);
+    console.log(editData);
+    dispatch({ type: "name", payload: editData.name });
+    dispatch({ type: "email", payload: editData.email });
+    setUpdate(true);
   };
-
   return (
     <div className={styles.wraper}>
       <div className={styles.container}>
@@ -66,19 +70,23 @@ const Form = () => {
         <div className={styles.inputs}>
           <TextField
             sx={{ width: "15vw", marginTop: "1rem" }}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) =>
+              dispatch({ type: "name", payload: e.target.value })
+            }
             label="Name"
             variant="standard"
             type="text"
-            value={name}
+            value={response.name}
           />
           <TextField
             sx={{ width: "15vw", marginTop: "1rem" }}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) =>
+              dispatch({ type: "email", payload: e.target.value })
+            }
             label="E-mail"
             variant="standard"
             type="text"
-            value={email}
+            value={response.email}
           />
 
           <Button
@@ -86,50 +94,53 @@ const Form = () => {
             sx={{ marginTop: "2rem" }}
             variant="contained"
           >
-            {edit ? "Update" : "Submit"}
+            {update ? "Update" : "Submit"}
           </Button>
         </div>
 
-        {show ? (
-          <div className={styles.result}>
-            <table>
-              <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>E-mail</td>
+        <div className={styles.result}>
+          <table>
+            <thead>
+              <tr>
+                <td>Name</td>
+                <td>E-mail</td>
 
-                  <td>Action</td>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item) => {
-                  return (
-                    <tr key={item.id}>
-                      <td>{item.name}</td>
-                      <td>{item.email}</td>
-                      <td style={{padding:"0.5rem 0"}}>
-                        <Button 
-                          variant="contained"
-                          onClick={() => handleEdit(item.id)}
-                        >
-                          Edit
-                        </Button>
-                        <Button sx={{marginLeft:"1rem", backgroundColor:"rosybrown", ":hover":{bgcolor:"red"}}}
-                          variant="contained"
-                          onClick={() => handleDelete(item.id)}
-                        >
-                          Delete
-                        </Button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <></>
-        )}
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody>
+              {response.data.map((item) => {
+                return (
+                  <tr key={item.id}>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    <td style={{ padding: "0.5rem 0" }}>
+                      <Button
+                        variant="contained"
+                        onClick={() => handleEdit(item.id)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        onClick={() => handleDelete(item.id)}
+                        sx={{
+                          marginLeft: "1rem",
+                          backgroundColor: "rosybrown",
+                          ":hover": { bgcolor: "red" },
+                        }}
+                        variant="contained"
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        <></>
       </div>
     </div>
   );
