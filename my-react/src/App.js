@@ -1,11 +1,14 @@
-
-import DeviceTest from './components/DeviceTest';
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+import Task from "./components/Task";
 
 function App() {
   return (
-   <div className='App'>
-     <DeviceTest/>
-      </div>
+  
+    <BrowserRouter>
+    <Routes>
+      <Route exact path='/' element={<Task/>}/>
+    </Routes>
+    </BrowserRouter>
     )
  
 }
